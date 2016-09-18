@@ -1,0 +1,11 @@
+version: '2'
+services:
+    gogs:
+      image: gogs/gogs
+      ports:
+          - "22:22"
+          - "3000:3000"
+    db:
+      image: ivlis/alpine-postgres
+      environment:
+          - POSTGRES_DB=gogs
