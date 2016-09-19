@@ -5,7 +5,14 @@ services:
       ports:
           - "22:22"
           - "3000:3000"
+      volumes:
+          - gogs-data:/data
     db:
       image: ivlis/alpine-postgres
       environment:
           - POSTGRES_DB=gogs
+      volumes:
+          - db-data:/var/lib/postgresql/data
+volumes:
+    gogs-data:
+    db-data:
