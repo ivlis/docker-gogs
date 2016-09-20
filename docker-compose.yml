@@ -1,18 +1,25 @@
 version: '2'
 services:
     gogs:
-      image: gogs/gogs
-      ports:
-          - "22:22"
-          - "3000:3000"
-      volumes:
-          - gogs-data:/data
+        image: gogs/gogs
+        ports:
+            - "22:22"
+            - "3000:3000"
+        volumes:
+            - gogs-data:/data
+            - ./gogs/app.ini:/data/gogs/conf/app.ini
     db:
-      image: ivlis/alpine-postgres
-      environment:
-          - POSTGRES_DB=gogs
-      volumes:
-          - db-data:/var/lib/postgresql/data
+        image: ivlis/alpine-postgres
+        environment:
+            - POSTGRES_DB=gogs
+        volumes:
+            - db-data:/var/lib/postgresql/data
+    redis:
+        image: redis:3-alpine
+        command: "redis-server /usr/local/etc/redis/redis.conf"
+        volumes:
+            - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+
 volumes:
     gogs-data:
     db-data:
