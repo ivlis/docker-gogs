@@ -2,9 +2,9 @@ version: '2'
 services:
     gogs:
         image: gogs/gogs
-        ports:
-            - "22:22"
-            - "3000:3000"
+        # ports:
+        #     - "22:22"
+        #     - "3000:3000"
         volumes:
             - gogs-data:/data
             - ./gogs/app.ini.tmpl:/data/gogs/conf/app.ini.tmpl
