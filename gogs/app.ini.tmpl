@@ -37,7 +37,8 @@ DISABLE_GRAVATAR        = false
 ENABLE_FEDERATED_AVATAR = false
 
 [session]
-PROVIDER = file
+PROVIDER = redis
+PROVIDER_CONFIG=network=tcp,addr=redis:6379,db=0,pool_size=100,idle_timeout=180
 
 [log]
 MODE      = file
