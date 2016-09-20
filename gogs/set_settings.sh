@@ -5,7 +5,10 @@ set -e
 
 apk --update add gettext
 
-export SECRET_KEY=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};echo;)
+[ ! -f /data/secret-key ] && \
+    echo $(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32}) > /data/secret-key
+
+export SECRET_KEY=$(cat /data/secret-key)
 
 cat /data/gogs/conf/app.ini.tmpl | envsubst > /data/gogs/conf/app.ini
 
