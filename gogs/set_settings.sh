@@ -12,4 +12,7 @@ export SECRET_KEY=$(cat /data/secret-key)
 
 cat /data/gogs/conf/app.ini.tmpl | envsubst > /data/gogs/conf/app.ini
 
+rm -rf /app/gogs/docker/s6/openssh || /bin/true
+rm -rf /app/gogs/docker/s6/crond || /bin/true
+
 exec /bin/s6-svscan /app/gogs/docker/s6/

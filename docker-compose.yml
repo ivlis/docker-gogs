@@ -1,9 +1,8 @@
 version: '2'
 services:
-    gogs:
+    gogs-web:
         image: gogs/gogs
-        ports:
-            - "22:22"
+        # ports:
         #     - "3000:3000"
         volumes:
             - gogs-data:/data
@@ -16,6 +15,14 @@ services:
             - APP_NAME="Gogs Go Git Service"
             - PUBLIC_PROTO=https
             - DISABLE_REGISTRATION=true
+    gogs-ssh:
+        image: gogs/gogs
+        ports:
+            - "22:22"
+        volumes:
+            - gogs-data:/data
+            - ./gogs/start_ssh.sh:/docker/start_ssh.sh
+        command: "sh -c '/docker/start_ssh.sh'"
     db:
         image: ivlis/alpine-postgres
         environment:
